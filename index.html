@@ -95,20 +95,44 @@ footer a:hover {
 	  <script>
       // JavaScript code
       window.addEventListener('load', function() {
-        // Mendapatkan alamat IP pengguna
-        fetch('https://api.ipify.org/?format=json')
-          .then(function(response) {
-            return response.json();
-          })
-          .then(function(data) {
-            // Menampilkan alamat IP pengguna di dalam elemen H1
-            var h1 = document.querySelector('h1');
-            h1.textContent = 'Your IP Address: ' + data.ip;
-          })
-          .catch(function(error) {
-            console.log(error);
-          });
-      });
+  // Mendapatkan alamat IP pengguna
+  fetch('https://api.ipify.org/?format=json')
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(data) {
+      // Menampilkan alamat IP pengguna di dalam elemen H1
+      var h1 = document.querySelector('h1');
+      h1.textContent = 'Your IP Address: ' + data.ip;
+      
+      // Memeriksa apakah alamat IP pengguna terdaftar di daftar hitam
+      let url = "https://mxtoolbox.com/api/v1/blacklist/check?ip=" + data.ip;
+
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          var icon = document.createElement('i');
+          icon.style.fontSize = '20px';
+          icon.style.marginLeft = '5px';
+          if (data.IsBlacklisted) {
+            h1.textContent += ' (Bad IP)';
+            h1.style.color = 'red';
+            icon.classList.add('fa', 'fa-times', 'text-danger');
+          } else {
+            h1.textContent += ' (Good IP)';
+            h1.style.color = 'green';
+            icon.classList.add('fa', 'fa-check', 'text-success');
+          }
+          h1.appendChild(icon);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
+});
     </script>
 <center>
 <div id="aswift_2_host" style="border: none; height: 250px; width: 300px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block;" tabindex="0" title="Advertisement" aria-label="Advertisement"><iframe id="aswift_2" name="aswift_2" style="left:0;position:absolute;top:0;border:0;width:300px;height:250px;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="300" height="250" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" src="https://googleads.g.doubleclick.net/pagead/ads?client=ca-google&amp;output=html&amp;h=250&amp;adk=1897245940&amp;adf=1523481722&amp;w=300&amp;lmt=1668939523&amp;format=300x250&amp;url=https%3A%2F%2Fcontoh-bloglagi.blogspot.com%2F&amp;host=ca-host-pub-1556223355139109&amp;wgl=1&amp;uach=WyJXaW5kb3dzIiwiMC4xLjAiLCJ4ODYiLCIiLCIxMDYuMC41MjQ5LjExOSIsW10sZmFsc2UsbnVsbCwiMzIiLFtbIkNocm9taXVtIiwiMTA2LjAuNTI0OS4xMTkiXSxbIkdvb2dsZSBDaHJvbWUiLCIxMDYuMC41MjQ5LjExOSJdLFsiTm90O0E9QnJhbmQiLCI5OS4wLjAuMCJdXSxmYWxzZV0.&amp;dt=1669611445477&amp;bpp=3&amp;bdt=891&amp;idt=318&amp;shv=r20221110&amp;mjsv=m202211100101&amp;ptt=9&amp;saldr=aa&amp;abxe=1&amp;prev_fmts=634x90%2C634x90%2C0x0&amp;nras=1&amp;correlator=6552000100140&amp;frm=20&amp;pv=1&amp;ga_vid=502991502.1659509067&amp;ga_sid=1669611446&amp;ga_hid=1838879268&amp;ga_fc=1&amp;u_tz=-300&amp;u_his=1&amp;u_h=768&amp;u_w=1366&amp;u_ah=738&amp;u_aw=1366&amp;u_cd=24&amp;u_sd=1&amp;dmc=2&amp;adx=186&amp;ady=55&amp;biw=663&amp;bih=667&amp;scr_x=0&amp;scr_y=0&amp;eid=44759875%2C44759926%2C44759837%2C42531706%2C44768832&amp;oid=2&amp;pvsid=1152179006195178&amp;tmod=58311339&amp;uas=0&amp;nvt=2&amp;ref=https%3A%2F%2Fcontoh-bloglagi.blogspot.com%2F&amp;eae=0&amp;fc=896&amp;brdim=0%2C0%2C0%2C0%2C1366%2C0%2C1366%2C738%2C680%2C667&amp;vis=1&amp;rsz=%7C%7CleE%7C&amp;abl=CS&amp;pfx=0&amp;fu=0&amp;bc=31&amp;ifi=3&amp;uci=a!3&amp;fsb=1&amp;xpc=Pdb8esbkWt&amp;p=https%3A//contoh-bloglagi.blogspot.com&amp;dtd=324" data-google-container-id="a!3" data-google-query-id="CPm-9K2L0PsCFW-qSwUdj2YA7w" data-load-complete="true"></iframe></div><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></center>
